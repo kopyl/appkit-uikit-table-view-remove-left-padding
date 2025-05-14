@@ -1,5 +1,14 @@
 import Cocoa
 
+class NoPaddingCellView: NSTableCellView {
+    override func layout() {
+        super.layout()
+        if let subview = subviews.first {
+            subview.frame.origin.x = -6
+        }
+    }
+}
+
 class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     let tableView = NSTableView()
@@ -38,9 +47,19 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let textLabel = NSTextField(labelWithString: items[row])
-        textLabel.wantsLayer = true
-        textLabel.layer?.backgroundColor = .black
-        return textLabel
+        let cell = NoPaddingCellView()
+        let label = NSTextField(labelWithString: items[row])
+        label.wantsLayer = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        cell.addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+            label.topAnchor.constraint(equalTo: cell.topAnchor),
+            label.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
+        ])
+
+        return cell
     }
 }
