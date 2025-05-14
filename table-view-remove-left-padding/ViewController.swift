@@ -49,7 +49,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = NoPaddingCellView()
         let label = NSTextField(labelWithString: items[row])
-        label.wantsLayer = true
         label.translatesAutoresizingMaskIntoConstraints = false
         cell.addSubview(label)
 
