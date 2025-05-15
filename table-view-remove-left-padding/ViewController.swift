@@ -14,6 +14,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableView.dataSource = self
         tableView.focusRingType = .none
         
+        tableView.style = .plain
+        tableView.intercellSpacing.width = 0
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(tableView)
